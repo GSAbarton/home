@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>barton GSA</title>
+    <style>
+        .wrapper {
+          /* The height needs to be set to a fixed value for the effect to work.
+           * 100vh is the full height of the viewport. */
+          height: 100vh;
+          /* The scaling of the images would add a horizontal scrollbar, so disable x overflow. */
+          overflow-x: hidden;
+          /* Enable scrolling on the page. */
+          overflow-y: auto;
+          /* Set the perspective to 2px. This is essentailly the simulated distance from the viewport to transformed objects.*/
+          perspective: 2px;
+        }
+        
+        .section {
+          /* Needed for children to be absolutely positioned relative to the parent. */
+          position: relative;
+          /* The height of the container. Must be set, but it doesn't really matter what the value is. */
+          height: 100vh;
+        
+          /* For text formatting. */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #eebaff;
+          font-size: 50px;
+          text-shadow: 20px 20px 20px #000;
+        }
+        
+        .parallax::after {
+          /* Display and position the pseudo-element */
+          content: " ";
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+        
+          /* Move the pseudo-element back away from the camera,
+           * then scale it back up to fill the viewport.
+           * Because the pseudo-element is further away, it appears to move more slowly, like in real life. */
+          transform: translateZ(-1px) scale(1.5);
+          /* Force the background image to fill the whole element. */
+          background-size: 100%;
+          /* Keep the image from overlapping sibling elements. */
+          z-index: -1;
+        }
+        
+        /* The styling for the static div. */
+        .static {
+          background: red;
+        }
+        
+        /* Sets the actual background images to adorable kitties. This part is crucial. */
+        .bg1::after {
+          background-image: url("https://upload.wikimedia.org/wikipedia/commons/6/6d/Rainbow_flag_and_blue_skies.jpg");
+        }
+        
+        .bg2::after {
+          background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAW8AAACJCAMAAADUiEkNAAAAV1BMVEX+AAD//wHGAc3/kAAH6CIANuD+IQD/lgD/jQD/tAGl9BUH7gYDf7EALuO1DtD+JSbKJs//mCX//yYo6TgmSOH+NiX+nSb/uSaq9C8o7ykmh7YmQeW6KtGh/W5jAAABRklEQVR4nO3Q2UFCARAAsVVULgUel6L2XyddzFdSQuY4lHy3fLd8t3y3fLd8t3y3fLd8t3y3fLd8t3y3fLd8t3y3fLd8t3y3fLd8t24fhOa+JjTLipDvlu+W75bvlu+W75bvlu+W75bvlu+W75bvlu+W75bvlu+W75bv1iwbQvO9JTTnF0K+W75bvlu+W75bvlu+W75bvlu+W75bvlu+W75bvlu+W75bvlu+W75bvlvzsyM0lzdCvlu+W75bvlu+W75bvlu+W75bvlu+W75bvlu+W75bvlu+W75bvlu+W/PYE5rfT0Lz90Voru+EfLd8t3y3fLd8t3y3fLd8t3y3fLd8t3y3fLd8t3y3fLd8t3y3fLd8t+b/QGhOr4R8t3y3fLd8t3y3fLd8t3y3fLd8t3y3fLd8t3y3fLd8t3y3fLd8t3y3fLeeiiRMt1gZyfUAAAAASUVORK5CYII=");
+        }
+        
+        
+        
+        
+        
+        /* Navbar container */
+        .navbar {
+          overflow: hidden;
+          background-color: #333;
+          font-family: Arial;
+        }
+        
+        /* Links inside the navbar */
+        .navbar a {
+          float: left;
+          font-size: 16px;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+        }
+        
+        /* The dropdown container */
+        .dropdown {
+          float: left;
+          overflow: hidden;
+        }
+        
+        /* Dropdown button */
+        .dropdown .dropbtn {
+          font-size: 16px;
+          border: none;
+          outline: none;
+          color: white;
+          padding: 14px 16px;
+          background-color: inherit;
+          font: inherit; /* Important for vertical align on mobile phones */
+          margin: 0; /* Important for vertical align on mobile phones */
+        }
+        
+        /* Add a red background color to navbar links on hover */
+        .navbar a:hover, .dropdown:hover .dropbtn {
+          background-color: red;
+        }
+        
+        /* Dropdown content (hidden by default) */
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f9f9f9;
+          width: 100%;
+          left: 0;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+        
+        /* Mega Menu header, if needed */
+        .dropdown-content .header {
+          background: red;
+          padding: 16px;
+          color: white;
+        }
+        
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+        
+        /* Create three equal columns that floats next to each other */
+        .column {
+          float: left;
+          width: 33.33%;
+          padding: 10px;
+          background-color: #ccc;
+          height: 250px;
+        }
+        
+        /* Style links inside the columns */
+        .column a {
+          float: none;
+          color: black;
+          padding: 16px;
+          text-decoration: none;
+          display: block;
+          text-align: left;
+        }
+        
+        /* Add a background color on hover */
+        .column a:hover {
+          background-color: #ddd;
+        }
+        
+        /* Clear floats after the columns */
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+    </style>
+  </head>
+  <body>
+    <main class="wrapper">
+      <section class="section parallax bg1">
+        <h1>WELCOME TO BARTON GSA</h1>
+      </section>
+      <section class="section parallax bg2">
+        <h1>*stuff here*</h1>
+      </section>
+      <div class="navbar">
+          <a href="#home">Home</a>
+          <a href="#news">News</a>
+          <a href="#news">History of LGBTQ</a>
+          <a href="#news">support page</a>
+          <a href="#news">education</a>
+          <a href="#news">forum(maybe)</a>
+          <div class="dropdown">
+            <button class="dropbtn">More
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <div class="header">
+                <h2>Mega Menu</h2>
+              </div>
+              <div class="row">
+                <div class="column">
+                  <h3>Category 1</h3>
+                  <a href="#">Link 1</a>
+                  <a href="#">Link 2</a>
+                  <a href="#">Link 3</a>
+                </div>
+                <div class="column">
+                  <h3>Category 2</h3>
+                  <a href="#">Link 1</a>
+                  <a href="#">Link 2</a>
+                  <a href="#">Link 3</a>
+                </div>
+                <div class="column">
+                  <h3>Category 3</h3>
+                  <a href="#">Link 1</a>
+                  <a href="#">Link 2</a>
+                  <a href="#">Link 3</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <image src="data:image/png;base64,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">
+            
+        </image>
+    </main>
+  </body>
+</html>
